@@ -1,0 +1,2 @@
+# Infosys-SpringBoard-Project-Development-for-Real-Time-Competitor-Strategy-Tracker-for-E-commerce
+Developed a project to analyze and track competitors’ pricing, product availability, and promotional strategies in real time for e-commerce platforms. The system helps businesses make data-driven decisions by providing insights into market trends, competitor behavior, and dynamic pricing strategies.
