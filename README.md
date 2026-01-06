@@ -62,3 +62,67 @@ I built and trained a robust Multi-Layer Perceptron (MLP) with the following arc
 * ✅ **Data Pipeline:** Automated MNIST downloading, normalization, and one-hot encoding scripts.
 * ✅ **Trained Weights:** Final weights exported to `.npy` format for future inference without re-training.
 
+---
+---
+
+## 🕷️ Milestone 2: Web Scraping & Data Aggregation
+
+### 📌 Overview
+
+In this milestone, I transitioned from using static, pre-existing datasets to building a **custom data pipeline**. I developed a robust web crawler that automates the collection of unstructured data from the web and transforms it into a structured, "AI-ready" format. This stage is critical for real-world AI applications where data must be sourced and cleaned manually.
+
+---
+
+### 🛠️ Tech Stack & Advanced Tooling
+
+To handle dynamic content and efficient data storage, I utilized:
+
+* **Automation Engines:**
+* `Playwright`: Used for high-speed browser automation and handling JavaScript-heavy pages.
+* `BeautifulSoup4` & `lxml`: Employed for precise HTML parsing and "Deep Scrapping" of text content.
+
+
+* **Data Processing:**
+* `Pandas`: The primary engine for data aggregation, cleaning, and CSV/JSON export.
+* `Regex (re)`: Used for data normalization (e.g., converting currency strings into floats).
+
+
+* **Intelligence Layer:**
+* `Transformers (RoBERTa)`: Integrated a Large Language Model to perform real-time sentiment analysis on the scraped headlines.
+
+
+
+---
+
+### 🧠 Core Engineering Concepts
+
+#### **1. Master-Detail Aggregation Pattern**
+
+Instead of a surface-level scrape, I implemented a **Two-Tier Crawler**. The script first scans a "Master" list of items and then "drills down" into each individual "Detail" page. This allows the collection of rich metadata like product descriptions, categories, and technical specifications that are hidden from the main view.
+
+#### **2. Data Normalization & Transformation**
+
+Raw web data is often "noisy." I built a transformation layer to:
+
+* Convert text-based ratings (e.g., "Three") into numerical integers (`3`).
+* Strip currency symbols and convert price strings into mathematical floats.
+* Filter out "Stop Words" and special characters to extract high-value trending keywords.
+
+#### **3. Ethical & Robust Crawling**
+
+To ensure the scraper operates reliably in a production environment:
+
+* **Politeness Latency:** Implemented `time.sleep()` intervals to mimic human behavior and avoid IP banning.
+* **Dynamic Pagination:** Developed logic to automatically discover and follow "Next" buttons until the entire 1,000-item catalog was aggregated.
+* **Error Handling:** Used `try-except` blocks to ensure that a single broken link doesn't crash the entire multi-hour scraping session.
+
+---
+
+### 📊 Deliverables & Results
+
+* ✅ **Structured Dataset:** A consolidated `books.csv` featuring 1,000+ entries with 8+ data dimensions.
+* ✅ **Trend Analysis:** Automated identification of the "Top 5 Trending Keywords" from live Google News feeds.
+* ✅ **Sentiment Index:** A real-time market mood indicator powered by the **RoBERTa LLM**, mapping global headlines to a polarity score between -1 and 1.
+
+---
+---
