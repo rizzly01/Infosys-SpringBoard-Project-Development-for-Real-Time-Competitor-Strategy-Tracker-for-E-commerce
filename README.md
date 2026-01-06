@@ -126,3 +126,62 @@ To ensure the scraper operates reliably in a production environment:
 
 ---
 ---
+
+
+# 📊 Milestone 3: AI Sentiment Analysis & Semantic Modeling
+
+## 🎯 Overview
+
+In this milestone, I moved beyond data collection to perform **Deep Text Analytics**. By integrating a Transformer-based LLM and mathematical similarity metrics, I developed a **Weighted Popularity Index** to rank the scraped bookstore data based on emotional tone, information density, and semantic quality.
+
+## 🛠️ Technical Implementation
+
+### 1. Contextual Sentiment Analysis (LLM)
+
+Instead of using basic word-matching, I implemented the **cardiffnlp/twitter-roberta-base-sentiment-latest** model. This RoBERTa-based Transformer understands context, sarcasm, and complex sentence structures to classify descriptions into **Positive**, **Neutral**, or **Negative** categories.
+
+### 2. Lexical Diversity (Jaccard Distance)
+
+I used **Jaccard Distance** to measure the "Information Gap" between a book's Title and its Description.
+
+* **Logic:** Calculates the intersection over union of word sets.
+* **Goal:** To quantify how much unique narrative information is provided on the product page versus the surface-level metadata.
+
+### 3. Semantic Alignment (Cosine Similarity)
+
+I implemented **TF-IDF Vectorization** to map book descriptions into a multi-dimensional vector space.
+
+* **Benchmark:** Every book was compared against a "Gold Standard" anchor (a description representing a literary masterpiece).
+* **Metric:** Calculated the **Cosine Similarity** () to determine thematic alignment.
+
+---
+
+## 📈 The Popularity Index Formula
+
+The core of this milestone is a custom-engineered **Popularity Index (0-100)**, calculated using a weighted linear combination:
+
+| Feature | Weight | Purpose |
+| --- | --- | --- |
+| **Sentiment** | 40% | Measures the emotional "vibe" and market appeal. |
+| **Cosine Similarity** | 40% | Measures literary quality and thematic depth. |
+| **Jaccard Distance** | 20% | Measures informational richness and variety. |
+
+---
+
+## 🧪 Results & Deliverables
+
+The pipeline generates a final report: `milestone3_popularity_report.csv`.
+
+**Top 20 Analysis Observation:**
+
+* **Semantic Clustering:** Books that used professional and evocative language (high Cosine score) significantly outperformed generic descriptions in the final index.
+* **Model Accuracy:** The RoBERTa model successfully identified "Dark Dramas" as high-quality content, proving superior to basic NLP libraries which often mistake dark themes for negative sentiment.
+
+## 🚀 How to Run
+
+1. Ensure you have the required libraries: `pip install transformers torch scikit-learn pandas nltk`
+2. Run the analysis script: `python milestone3_analysis.py`
+3. View the generated report: `milestone3_popularity_report.csv`
+
+---
+---
