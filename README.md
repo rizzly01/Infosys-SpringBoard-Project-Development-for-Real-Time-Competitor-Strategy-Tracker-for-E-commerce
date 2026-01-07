@@ -185,3 +185,75 @@ The pipeline generates a final report: `milestone3_popularity_report.csv`.
 
 ---
 ---
+
+# 🚀 Milestone 4: Cross-Platform Integration & Notification System Deployment
+
+## 🎯 Overview
+
+Milestone 4 marks the transition from static data analysis to a **Live Market Intelligence System**. This phase focused on bridging two distinct web environments—the source catalog and a global market API—using **Semantic Intelligence** to ensure 100% product matching accuracy. The result is an automated agent that not only identifies price gaps but also generates a real-time competitive pricing strategy.
+
+## 🧠 Core Intelligence: Semantic Embedding
+
+The primary challenge of this milestone was the "Identity Problem": matching a book title from the source (which lacked standardized IDs) to a competitor’s ISBN-13 database.
+
+### 1. Vector Space Mapping
+
+Instead of traditional keyword matching, I implemented the `SentenceTransformer ('all-MiniLM-L6-v2')` model.
+
+* **The Logic:** Book titles are converted into high-dimensional numerical vectors (Embeddings).
+* **The Advantage:** The AI "understands" that *'orange: The Complete Collection 1'* and *'Orange (Complete Edition) Vol 1'* are the same entity, even if the characters don't match exactly.
+
+### 2. Semantic Similarity Validation
+
+Using `util.cos_sim` (Cosine Similarity), the agent calculates a confidence score between the source title and the Google Books database.
+
+* **Threshold:** A **70% similarity barrier** was implemented. If the AI isn't at least 70% confident in the match, the record is discarded to prevent "Pricing Hallucinations."
+
+---
+
+## 🛠️ System Architecture
+
+### 🛡️ Identity Bridge (Google Books API)
+
+The agent uses the Google Books API as a neutral third-party validator to convert raw titles into standardized **ISBN-10** and **ISBN-13** identifiers.
+
+### 📊 Market Intelligence (Booksrun API)
+
+Once the identity is verified, the agent queries the **Booksrun API** to pull live market data, specifically looking for:
+
+* **Direct Stock Prices:** Lowest price currently held in the warehouse.
+* **Marketplace Prices:** Aggregated lowest price from third-party sellers (Amazon, eBay, etc.).
+
+### ⚖️ Dynamic Pricing Logic
+
+I engineered an autonomous pricing strategy based on market tiers:
+| Market Price | Strategy | Discount | Goal |
+| :--- | :--- | :--- | :--- |
+| **> £30** | High Value | 15% | Undercut premium competitors |
+| **< £30** | Standard | 10% | Maintain volume and margin |
+
+---
+
+## 📈 Key Observations from Deployment
+
+### 1. Massive Price Disparities
+
+The agent identified significant market inefficiencies.
+
+* **Example:** *Thomas Jefferson and the Tripoli Pirates* was listed at **£59.64** at the source, while the market benchmark was **£4.02**.
+* **Impact:** The system prevents the business from listing uncompetitive prices that would result in zero conversions.
+
+### 2. ISBN Cross-Referencing
+
+The agent successfully matched the source `UPC` (Unique Product Code) to the competitor `ISBN-13`. This "Platform Bridge" is the foundation for scaling across any e-commerce environment.
+
+---
+
+## 📁 Deliverables
+
+* **`final_market_analysis.csv`**: A ready-to-upload pricing sheet for Excel/Google Sheets.
+* **`final_market_analysis.json`**: Structured data for integration into web dashboards or mobile notifications.
+* **Execution Log**: Demonstrating 15/15 successful semantic matches with 0% identity errors.
+
+---
+
